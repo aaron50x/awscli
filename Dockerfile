@@ -1,7 +1,7 @@
 FROM python:3
-RUN apt-get update
-RUN useradd -m awscli
-RUN apt-get -y install groff && \
+RUN apt-get update && \
+    useradd -m awscli && \
+    apt-get -y install groff && \
     pip install --upgrade --prefix /home/awscli/.local awscli && \
     chown -R awscli:awscli /home/awscli/.local && \
     ln -s /home/awscli/.local/bin/aws  /usr/local/bin/aws && \
@@ -16,4 +16,4 @@ RUN apt-get -y install groff && \
     chown awscli:awscli /home/awscli/.bashrc
 
 USER awscli
-
+CMD ["/bin/bash"]
